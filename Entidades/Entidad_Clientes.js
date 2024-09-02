@@ -1,2 +1,74 @@
-<zxcdad
+const express = require ('express');
 
+//Crea el Express Server
+const app = express ();
+
+//Parse body as json
+app.use(express.json());
+
+let clientes =[
+    {id : '1' , nombre : 'Maxi'},
+    {id : '2' , nombre : 'Facundo'},
+    {id : '3' , nombre : 'Ivan'},
+    {id : '4' , nombre : 'Marcelo'},
+    {id : '5' , nombre : 'Myriam'},
+    {id : '6' , nombre : 'Marcela'}
+
+]
+
+let nextId = 6;
+ 
+app.post('/carpetas/clientes' , (req,res) => {
+    const { nombre , email } = req.body;
+    
+    if(nombre && email) {
+
+        const nuevoCliente = {
+
+            id : nextId++,
+            nombre,
+            email
+        };
+
+        clientes.push(nuevoCliente);
+        res.status(201).json(nuevoCliente);
+    } else {
+
+        res.status(400).send('Datos incorrectos');
+    }
+
+} );
+
+//Leemos los clientes
+app.get('/carpetas/clientes' , (req,res) => { 
+
+    res.json(clientes);
+})
+
+// Leer un cliente por ID
+app.get('/carpetas/clientes/:id', (req, res) => {
+    const cliente = clientes.find(c => c.id === parseInt(req.params.id));
+
+    if (cliente) {
+        res.json(cliente);
+    } else {
+        res.status(404).send('Cliente no encontrado');
+    }
+});
+
+// Eliminar un cliente por ID (baja)
+app.delete('/clientes/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = clientes.findIndex(c => c.id === id);
+
+    if (index !== -1) {
+        const clienteEliminado = clientes.splice(index, 1)[0];
+        res.json(clienteEliminado);
+    } else {
+        res.status(404).send('Cliente no encontrado');
+    }
+});
+
+// Configurar el puerto y poner a escuchar el servidor
+const port = 3000;
+app.listen(port, () => console.log(`Servidor escuchando en el puerto ${port}`));
