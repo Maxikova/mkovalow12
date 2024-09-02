@@ -10,12 +10,12 @@ app.use(express.json());
 
 
 let clientes =[
-    {id : '1' , nombre : 'Maxi'},
-    {id : '2' , nombre : 'Facundo'},
-    {id : '3' , nombre : 'Ivan'},
-    {id : '4' , nombre : 'Marcelo'},
-    {id : '5' , nombre : 'Myriam'},
-    {id : '6' , nombre : 'Marcela'}
+    {id : '1' , nombre : 'Maxi' , email : 'maxi@gmail.com'},
+    {id : '2' , nombre : 'Facundo' , email : 'facu@gmail.com'},
+    {id : '3' , nombre : 'Ivan' , email : 'ivanchu@gmail.com'},
+    {id : '4' , nombre : 'Marcelo' , email : 'marceloda@gmail.com'},
+    {id : '5' , nombre : 'Myriam' , email : 'my@gmail.com'} ,
+    {id : '6' , nombre : 'Marcela', email : 'marce13@gmail.com'}
 
 
 ]
