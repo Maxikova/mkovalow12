@@ -59,7 +59,7 @@ app.get('/carpetas/clientes' , (req,res) => {
 
 
 // Leer un cliente por ID
-app.get('/carpetas/clientes/:id', (req, res) => {
+app.get('/carpetas/clientes/:nombre', (req, res) => {
     //const cliente = clientes.find(c => c.id === parseInt(req.params.id));
     const cliente = clientes.find(c => c.nombre.toLowerCase() === req.params.nombre.toLowerCase());
 
