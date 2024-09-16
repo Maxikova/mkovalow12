@@ -1,0 +1,41 @@
+Indumentaria :
+
+GET /indumentaria: Devuelve toda la indumentaria del local
+GET /indumentaria/botines: Devuelve solamente los botines
+GET /indumentaria/medias: Devuelve solamente las medias 
+GET /indumentaria/short: Devuelve solamente los shorts
+GET /indumentaria/remera: Devuelve solamente las remeras
+
+POST /indumentaria : Permite agregar indumentaria, y sucede lo mismo por cada rubro
+
+PUT /indumentaria/rubro/id : Permite actualizar indumentaria segun el rubro
+DELETE /indumentaria/rubro/id : Permite eliminar indumentaria.
+
+Clientes :
+
+GET /clientes: Devuelve una lista de todos los clientes registrados.
+GET /clientes/{dni}: Devuelve la información de un cliente específico por su DNI
+POST /clientes: Permite registrar un nuevo cliente.
+PUT /clientes/{dni}: Permite actualizar la información de un cliente ya creado anteriormente.
+DELETE /clientes/{dni}: Permite eliminar un cliente.
+
+
+Empleados:
+
+GET /empleados: Devuelve una lista de todos los empleados del local
+GET /empleados/{dni}: Devuelve la información de un empleado específico por su DNI
+POST /empleados: Permite que se agregue un nuevo empleado.
+PUT /empleados/{dni}: Permite actualizar la información de un empleado ya existente.
+DELETE /empleados/{dni}: Permite eliminar a un empleado
+
+Ventas: 
+
+GET /ventas: Devuelve una lista de todas las ventas realizadas en la concesionaria.
+GET /ventas/{id}: Devuelve la información detallada de una venta específica por su ID.
+POST /ventas: Permite registrar una nueva venta realizada por un empleado.
+PUT /ventas/{id}: Permite actualizar la información de una venta existente.
+DELETE /ventas/{id}: Permite cancelar una venta realizada.
+
+Asociación ventas-empleados:
+
+GET /empleados/{dni}/ventas: Devuelve una lista de todas las ventas realizadas por un empleado específico.
