@@ -1,4 +1,4 @@
-# Trabajo Practio Arquitectura WEB 2024
+# Trabajo Practico Arquitectura WEB 2024
 
 Desarollaré un sistema para una vineria.
 
