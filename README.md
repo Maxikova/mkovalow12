@@ -1,8 +1,8 @@
 # Trabajo Practio Arquitectura WEB 2024
 
-Desarollaré un sistema de venta de ropa deportiva para un local.
+Desarollaré un sistema para una vineria.
 
 ##Proposito 
 
-Se podran hacer consultaa sobre la indumentaria del local (botines,remeras,medias,shorts,etc.) , de los clientes del local, de los empleados y de las ventas que haya en el local, con el fin de asociar estas ultimas con cada uno de los empleados y saber cual empleado fue el que realizó mas ventas.
+Se podran hacer consultaa sobre los vinos en el local , de los clientes que asisten a comprar al local, de los empleados y de las ventas que haya en el local, con el fin de asociar estas ultimas con cada uno de los empleados y saber cual empleado fue el que realizó mas ventas.
 
