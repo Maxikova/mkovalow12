@@ -61,8 +61,8 @@ app.get('/v1/vinos/:id', async (req, res) => {
 });
 
 // Agregar un nuevo vino
-app.post('/v1/vinos', wrap (function*(req, res) {
-    const {marca, bodega, año, precio} = req.body;
+app.post('/v1/vinos', wrap(function*(req, res) {
+    const {marca, bodega, año, precio} = req.query;
 
     if (!marca || !bodega || !año || !precio)
     {
