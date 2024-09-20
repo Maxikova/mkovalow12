@@ -64,12 +64,12 @@ app.get('/v1/vinos/:id', async (req, res) => {
 app.post('/v1/vinos', wrap (function*(req, res) {
     const {marca, bodega, año, precio} = req.body;
 
-    if(!marca || !bodega || !año || !precio)
+    if (!marca || !bodega || !año || !precio)
     {
         return res.status(400).send('Faltan datos del vino');
     }
 
-    let newClient = yield servicioVinos.add(req.body); 
+    let nuevoVino = yield servicioVinos.add(req.body); 
     res.status(201).send("Vino creado correctamente");
 }));
 
