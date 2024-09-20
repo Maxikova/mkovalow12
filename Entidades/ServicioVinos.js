@@ -21,7 +21,7 @@ class ServicioVinos {
     // Busca vinos en base al criterio (nombre, bodega, año, precio)
     buscarVinos(consulta_vinos) {
         return new Promise(resolve => {
-            const { nombre, bodega, año, añoInicio, añoFin, precioMin, precioMax } = consulta_vinos;
+            const { nombre, bodega, año, precio } = consulta_vinos;
 
             let resultados = this._vinos;
 
@@ -37,16 +37,10 @@ class ServicioVinos {
 
             if (año) {
                 resultados = resultados.filter(v => v.año === parseInt(año));
-            } else if (añoInicio && añoFin) {
-                const inicio = parseInt(añoInicio);
-                const fin = parseInt(añoFin);
-                resultados = resultados.filter(v => v.año >= inicio && v.año <= fin);
-            }
+            } 
 
-            if (precioMin && precioMax) {
-                const min = parseFloat(precioMin);
-                const max = parseFloat(precioMax);
-                resultados = resultados.filter(v => v.precio >= min && v.precio <= max);
+            if (precio) {
+                resultados = resultados.filter(v => v.precio === parseInt(precio));
             }
 
             resolve(resultados);
