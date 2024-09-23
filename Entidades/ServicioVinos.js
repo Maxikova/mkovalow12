@@ -73,7 +73,7 @@ class ServicioVinos {
                 precio
             };
 
-            this._vinos.push(nuevoVino);
+            this._vinos.push(nuevoVino); 
 
             setTimeout(() => {
                 resolve(nuevoVino);
@@ -99,16 +99,21 @@ class ServicioVinos {
     // Eliminar vino por ID
     deleteById(id) {
         return new Promise((resolve, reject) => {
-            const index = this._vinos.findIndex(v => v.id === id);
-
+            const index = this._vinos.findIndex(v => v.id == id);
+    
             if (index !== -1) {
-                const vinoEliminado = this._vinos.splice(index, 1);
-                resolve(vinoEliminado);
+                this._vinos.splice(index, 1); // Elimino el vino
+                resolve(); 
             } else {
-                reject(`Vino con ID ${id} no encontrado`);
+                reject('Vino no encontrado');
             }
         });
+
+        //this._vinos = this._vinos.filter(c => c.id !== req.params.id);
     }
+
+    
+    
 }
 
 module.exports = new ServicioVinos();
