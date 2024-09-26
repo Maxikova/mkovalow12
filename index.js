@@ -1,12 +1,10 @@
 const express = require('express');
 const servicioVinos = require('./Entidades/ServicioVinos');
 const ServicioClientes = require('./Entidades/ServicioClientes');
-const ServicioEmpleados = require('./Entidades/ServicioEmpleados');
+//const ServicioEmpleados = require('./Entidades/ServicioEmpleados');
 const ServicioVentas = require('./Entidades/ServicioVentas');
-const bodyParser = require('body-parser');
-const moment     = require('moment');
 const wrap = require('co-express');
-const ServicioVentas = require('./Entidades/ServicioVentas');
+const moment = require('moment');
 const app = express();
 
 app.use(express.json());
@@ -29,7 +27,7 @@ app.get('/v1/vinos', async (req, res) => {
 // Buscar vinos por criterios
 app.get('/v1/vinos/buscar', async (req, res) => {
     try {
-        let vinos = await servicioVinos.buscarVinos(req.query);
+        let vinos = await servicioVinos.filterVinos(req.query);
         res.json(vinos);
     } catch(err) {
         console.log(err);
@@ -137,36 +135,36 @@ app.delete('/v1/clientes/:id', async (req, res) => {
 });
 
 
-//Endpoints empleados
+// //Endpoints empleados
 
-// Obtener todos los empleados
-app.get('/v1/empleados', async (req, res) => {
-    let empleados = await ServicioEmpleados.getAll();
-    res.json(empleados);
-});
+// // Obtener todos los empleados
+// app.get('/v1/empleados', async (req, res) => {
+//     let empleados = await ServicioEmpleados.getAll();
+//     res.json(empleados);
+// });
 
-// Obtener clientes por ID
-app.get('/v1/empleados/:id', async (req, res) => {
-    try {
-        let empleados = await ServicioEmpleados.getById(req.params.id); 
-        res.json(empleados);
-    } catch(err) {
-        console.log(err);
-        res.status(404).end();
-    }
-});
+// // Obtener clientes por ID
+// app.get('/v1/empleados/:id', async (req, res) => {
+//     try {
+//         let empleados = await ServicioEmpleados.getById(req.params.id); 
+//         res.json(empleados);
+//     } catch(err) {
+//         console.log(err);
+//         res.status(404).end();
+//     }
+// });
 
-// Eliminar un empleado por su ID
-app.delete('/v1/empleados/:id', async (req, res) => {
-    try {
-        let empleados = await service.deleteById(req.params.id);
-        res.json(empleados);
-    } catch (error) {
-        res.status(404).send('Empleado no encontrado');
-    }
-    // ServicioClientes.deleteById(req.params.id);
-    // res.status(204).end();
-});
+// // Eliminar un empleado por su ID
+// app.delete('/v1/empleados/:id', async (req, res) => {
+//     try {
+//         let empleados = await service.deleteById(req.params.id);
+//         res.json(empleados);
+//     } catch (error) {
+//         res.status(404).send('Empleado no encontrado');
+//     }
+//     // ServicioClientes.deleteById(req.params.id);
+//     // res.status(204).end();
+// });
 
 
 
@@ -176,40 +174,21 @@ app.get('/v1/ventas', async (req, res) => {
     res.json(ventas);
 });
 
-
+//Obtener venta por ID
 app.get('/v1/ventas/:id' , async(req,res) =>){
     try{
         let ventas = await ServicioVentas.getById(req.params.id);
         res.json(ventas);
     }
-
     catch(err){
         console.log(err);
         res.status(404).end();
     }
 
-}
-
-
-app.post('/v1/ventas', async (req, res) => {
-    const {idVino, idEmpleado} = req.query;
-    let ventas;
-    if (!idVino || !idEmpleado )
-    {
-        return res.status(400).send('Faltan datos para completar la venta');
-    }
-
-    try{
-        vino = await ServicioVentas.getById(idVino);
-        empleado = await ServicioVentas.getById(idEmpleado);
-    }
-
-    let ven = await ServicioClientes.add(req.query); 
-    res.status(201).send("Venta creada correctamente");
-});
-
+};
 
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+

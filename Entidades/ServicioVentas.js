@@ -20,34 +20,10 @@ class ServicioVentas {
         });
     }
 
-    getSaleByEmpleado(idEmpleado) {
-        return new Promise((resolve, reject) => {
-            const EmpleadoVentas = this._ventas.filter(v => v.idEmpleado === idEmpleado);
-            if (EmpleadoVentas) {
-                resolve(EmpleadoVentas);
-            } else {
-                reject(`El empleado con ID ${id} no hizo ninguna venta`);
-            }
-        });
-    }    
+    //Crear funcion para que muestre las ventas que se le hicieron a determinado cliente
 
 
-    addNuevaVenta(vinos,idEmpleado){
-        const NewSale = {
-            id: this._ventas.length ? this._ventas[this._ventas.length - 1].id + 1 : 1,
-            vinos,
-            idEmpleado: idEmpleado,
-            fecha_venta: new Date().toISOString()
-        };
-
-        return new Promise((resolve) => {
-            if (NewSale) {
-                this._ventas.push(NewSale);
-                resolve(this._ventas);
-            } 
-        });
-
-    }
+    //Crear función de nueva venta hecha de tal vino
 
 
     deleteById(id) {

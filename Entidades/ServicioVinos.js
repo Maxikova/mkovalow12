@@ -19,7 +19,7 @@ class ServicioVinos {
     }
 
     // Busca vinos en base al criterio (nombre, bodega, año, precio)
-    buscarVinos(consulta_vinos) {
+    filterVinos(consulta_vinos) {
         return new Promise(resolve => {
             const { nombre, bodega, año, precio } = consulta_vinos;
 
