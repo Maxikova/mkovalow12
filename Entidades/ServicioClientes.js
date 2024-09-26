@@ -94,20 +94,6 @@ class ServicioClientes {
         });
     }
 
-    // Eliminar cliente por ID
-    deleteById(id) {
-        return new Promise((resolve, reject) => {
-            const index = this._clientes.findIndex(v => v.id === id);
-
-            if (index !== -1) {
-               // const clienteEliminado = this._clientes.splice(index, 1);
-               // resolve(clienteEliminado);
-                resolve(this._clientes.splice(index, 1));
-            } else {
-                reject(`Cliente con ID ${id} no encontrado`);
-            }
-        });
-    }
-}
+};
 
 module.exports = new ServicioClientes();

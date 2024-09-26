@@ -175,7 +175,7 @@ app.get('/v1/ventas', async (req, res) => {
 });
 
 //Obtener venta por ID
-app.get('/v1/ventas/:id' , async(req,res) =>){
+app.get('/v1/ventas/:id' , async(req,res) =>{
     try{
         let ventas = await ServicioVentas.getById(req.params.id);
         res.json(ventas);
@@ -185,7 +185,7 @@ app.get('/v1/ventas/:id' , async(req,res) =>){
         res.status(404).end();
     }
 
-};
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
