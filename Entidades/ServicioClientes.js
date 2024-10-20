@@ -50,7 +50,7 @@ class ServicioClientes {
 
     getByCliente(id_cliente) {
         return new Promise((resolve, reject) => {
-            const comprasCliente = this._ventas.filter(v => v.id_cliente === id_cliente);
+            const comprasCliente = this._clientes.filter(v => v.id_cliente === id_cliente);
     
             // Verifico si el array tiene elementos y no esta vacio
             if (comprasCliente.length > 0) {
