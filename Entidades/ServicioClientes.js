@@ -48,10 +48,10 @@ class ServicioClientes {
     }
 
 
-    getByCliente(id_cliente) {
+    getByCliente(id) {
         return new Promise((resolve, reject) => {
             // Buscar el cliente por id
-            const cliente = this._clientes.find(c => c.id === id_cliente);
+            const cliente = this._clientes.find(c => c.id === id);
     
             // Verificar si el cliente y las ventas existen
             if (cliente && cliente.ventas && cliente.ventas.length > 0) {
