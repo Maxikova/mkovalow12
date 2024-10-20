@@ -48,22 +48,6 @@ class ServicioClientes {
     }
 
 
-    getByCliente(id) {
-        return new Promise((resolve, reject) => {
-            // Buscar el cliente por id
-            const cliente = this._clientes.find(c => c.id === id);
-    
-            // Verificar si el cliente y las ventas existen
-            if (cliente && cliente.ventas && cliente.ventas.length > 0) {
-                resolve(cliente.ventas);
-            } else {
-                reject(new Error('No se encontraron ventas para este cliente'));
-            }
-        });
-    }
-    
-    
-
     // Como cliente por el id
        getById(id) {
         return new Promise((resolve, reject) => {
