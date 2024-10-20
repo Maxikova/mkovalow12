@@ -42,19 +42,21 @@ class ServicioVentas {
 
     getByCliente(id_cliente) {
         return new Promise((resolve, reject) => {
-            const cliente = this._clientes.find(c => c.id === id_cliente);
+            const clientes = this._clientes.filter(c => c.id === id_cliente);
             
-            if (cliente && cliente.ventas && cliente.ventas.length > 0) {
-                resolve(cliente.ventas);
+            // Si encontramos al menos un cliente y este tiene ventas
+            if (clientes.length > 0 && clientes[0].ventas && clientes[0].ventas.length > 0) {
+                resolve(clientes[0].ventas);
             } else {
                 reject(new Error('No se encontraron ventas para este cliente'));
             }
         });
     }
+    
 
     addVenta(id_cliente, nuevaVenta) {
         return new Promise((resolve, reject) => {
-            const cliente = this._clientes.find(c => c.id === id_cliente);
+            const cliente = this._clientes.filter(c => c.id === id_cliente);
     
             if (cliente) {
                 if (!cliente.ventas) {
