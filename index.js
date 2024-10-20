@@ -188,12 +188,12 @@ app.post('/v1/ventas', async (req, res) => {
 app.get('/v1/clientes/:id/ventas', async(req, res) => {
   
     try {
-      const id_cliente = request.params.id_cliente;
-      let compras = await ServicioVentas.getByCliente(request.params.id_cliente);
-      response.json(compras);
+      const id_cliente = req.params.id_cliente;
+      let compras = await ServicioVentas.getByCliente(req.params.id_cliente);
+      res.json(compras);
     } catch(error) {
         console.log(error);
-        response.status(404).end();
+        res.status(404).end();
   
     }
   });
