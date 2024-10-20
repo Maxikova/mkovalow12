@@ -44,7 +44,7 @@ class ServicioVentas {
 
     getByCliente(id_cliente) {
         return new Promise((resolve, reject) => {
-            const clientes = this._clientes.find(c => c.id === id_cliente);
+            const clientes = this._ventas.find(c => c.id === id_cliente);
             
             // Si encontramos al menos un cliente y este tiene ventas
             if (clientes.length > 0 && clientes[0].ventas && clientes[0].ventas.length > 0) {
