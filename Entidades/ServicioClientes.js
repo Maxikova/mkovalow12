@@ -50,16 +50,18 @@ class ServicioClientes {
 
     getByCliente(id_cliente) {
         return new Promise((resolve, reject) => {
-            const comprasCliente = this._clientes.filter(v => v.id_cliente === id_cliente);
+            // Buscar el cliente por id
+            const cliente = this._clientes.find(c => c.id === id_cliente);
     
-            // Verifico si el array tiene elementos y no esta vacio
-            if (comprasCliente.length > 0) {
-                resolve(comprasCliente);
+            // Verificar si el cliente y las ventas existen
+            if (cliente && cliente.ventas && cliente.ventas.length > 0) {
+                resolve(cliente.ventas);
             } else {
-                reject(new Error('No se encontraron compras para este cliente'));
+                reject(new Error('No se encontraron ventas para este cliente'));
             }
         });
     }
+    
     
 
     // Como cliente por el id

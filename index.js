@@ -185,18 +185,17 @@ app.post('/v1/ventas', async (req, res) => {
 });
 
 //Obtengo las ventas especificas de los clientes
-app.get('/v1/clientes/:id/ventas', async(req, res) => {
-  
+app.get('/v1/clientes/:id/ventas', async (req, res) => {
     try {
-      const id = req.params.id;
-      let compras = await ServicioClientes.getByCliente(req.params.id);
-      res.json(compras);
-    } catch(error) {
-        console.log(error);
-        res.status(404).end();
-  
+        const id_cliente = parseInt(req.params.id, 10);
+        let compras = await ServicioClientes.getByCliente(id_cliente);
+        res.json(compras);
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({ error: error.message });
     }
-  });
+});
+
 
 
 const PORT = 3000;
