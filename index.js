@@ -25,7 +25,7 @@ app.get('/v1/vinos', async (req, res) => {
 });
 
 // Buscar vinos por criterios
-app.get('/v1/vinos/buscar', async (req, res) => {
+app.get('/v1/vinos/filtro', async (req, res) => {
     try {
         let vinos = await servicioVinos.filterVinos(req.query);
         res.json(vinos);
@@ -134,40 +134,6 @@ app.delete('/v1/clientes/:id', async (req, res) => {
     // res.status(204).end();
 });
 
-
-// //Endpoints empleados
-
-// // Obtener todos los empleados
-// app.get('/v1/empleados', async (req, res) => {
-//     let empleados = await ServicioEmpleados.getAll();
-//     res.json(empleados);
-// });
-
-// // Obtener clientes por ID
-// app.get('/v1/empleados/:id', async (req, res) => {
-//     try {
-//         let empleados = await ServicioEmpleados.getById(req.params.id); 
-//         res.json(empleados);
-//     } catch(err) {
-//         console.log(err);
-//         res.status(404).end();
-//     }
-// });
-
-// // Eliminar un empleado por su ID
-// app.delete('/v1/empleados/:id', async (req, res) => {
-//     try {
-//         let empleados = await service.deleteById(req.params.id);
-//         res.json(empleados);
-//     } catch (error) {
-//         res.status(404).send('Empleado no encontrado');
-//     }
-//     // ServicioClientes.deleteById(req.params.id);
-//     // res.status(204).end();
-// });
-
-
-
 // Obtener todas las ventas
 app.get('/v1/ventas', async (req, res) => {
     let ventas = await ServicioVentas.getAll();
@@ -186,6 +152,39 @@ app.get('/v1/ventas/:id' , async(req,res) =>{
     }
 
 });
+
+//Agrego Venta
+app.post('/v1/ventas', async (req, res) => {
+    const { id_cliente, id_vino } = req.body;
+
+    // Imprimir el cuerpo de la solicitud para depuración
+    console.log(req.body);
+
+    if (!id_vino || !id_cliente) {
+        return res.status(400).send('No están todos los datos para concretar la venta');
+    }
+
+    try {
+        const vino = await servicioVinos.getById(id_vino);
+        if (!vino) {
+            return res.status(404).send('ID de vino no encontrado');
+        }
+
+        const cliente = await ServicioClientes.getById(id_cliente);
+        if (!cliente) {
+            return res.status(404).send('ID de cliente no encontrado');
+        }
+
+        // Aquí agregamos la venta
+        await ServicioVentas.addVenta(id_vino, id_cliente);
+
+        res.status(201).send('Se registró la venta');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error interno del servidor');
+    }
+});
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
