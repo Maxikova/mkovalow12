@@ -67,19 +67,28 @@ class ServicioVentas {
         });
     }
 
-    getByClienteFrecuente(id_cliente) {
-        return new Promise((resolve, reject) => {
-            // Filtramos las ventas del cliente
-            const ventasDelCliente = this._ventas.filter(v => v.id === id_cliente);
+    getClientesFrecuentes() {
+        return new Promise((resolve) => {
+            const clientesFrecuentes = {};
 
-            // Verificamos cuántas ventas tiene el cliente
-            if (ventasDelCliente.length > 2) {
-                resolve(`El cliente con ID ${id_cliente} tiene más de 2 ventas.`);
-            } else if (ventasDelCliente.length === 2) {
-                resolve(`El cliente con ID ${id_cliente} tiene exactamente 2 ventas.`);
-            } else {
-                reject(new Error(`El cliente con ID ${id_cliente} no tiene más de 2 ventas.`));
-            }
+            // Contamos las ventas por cliente
+            this._ventas.forEach(venta => {
+                const { id_cliente } = venta;
+                if (!clientesFrecuentes[id_cliente]) {
+                    clientesFrecuentes[id_cliente] = 0; // Inicializa el contador
+                }
+                clientesFrecuentes[id_cliente]++; // Incrementa el contador de ventas
+            });
+
+            // Filtramos los clientes que tienen más de 2 ventas
+            const resultado = Object.keys(clientesFrecuentes)
+                .filter(clienteId => clientesFrecuentes[clienteId] > 2)
+                .map(clienteId => ({
+                    clienteId,
+                    totalVentas: clientesFrecuentes[clienteId]
+                }));
+
+            resolve(resultado);
         });
     }
 };

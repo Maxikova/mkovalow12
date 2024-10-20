@@ -199,12 +199,15 @@ app.get('/v1/clientes/:id/ventas', async (req, res) => {
 //Obtengo los clientes que no hicieron ninguna compra
 app.get('/v1/clientes/frecuentes', async (req, res) => {
     try {
-        // Asumimos que este método devuelve un array de clientes frecuentes
-        let clientesFrecuentes = await ServicioVentas.frecuentes();
-        res.json(clientesFrecuentes);
+        let clientesFrecuentes = await servicioVentas.getClientesFrecuentes();
+        if (clientesFrecuentes.length > 0) {
+            res.json(clientesFrecuentes);
+        } else {
+            res.status(404).json({ message: 'No hay clientes frecuentes.' });
+        }
     } catch (error) {
         console.error(error);
-        res.status(404).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
 });
 
