@@ -188,7 +188,7 @@ app.post('/v1/ventas', async (req, res) => {
 app.get('/v1/clientes/:id/ventas', async(req, res) => {
   
     try {
-      const id_cliente = req.params.id;
+      const id = req.params.id;
       let compras = await ServicioClientes.getByCliente(req.params.id);
       res.json(compras);
     } catch(error) {
