@@ -20,48 +20,52 @@ class ServicioVentas {
         });
     }
 
-    addVenta(id_cliente, id_vino) {
-        return new Promise((resolve, reject) => {
-            if (!id_cliente || !id_vino) {
-                return reject(new Error('Faltan datos para agregar la venta'));
-            }
+    // addVenta(id_cliente, id_vino) {
+    //     return new Promise((resolve, reject) => {
+    //         if (!id_cliente || !id_vino) {
+    //             return reject(new Error('Faltan datos para agregar la venta'));
+    //         }
     
-            const nueva_venta = {
-                id: this._ventas.length ? this._ventas[this._ventas.length - 1].id + 1 : 1,
-                id_cliente,
-                id_vino,
-                fecha_venta: new Date().toISOString()
-            };
+    //         const nueva_venta = {
+    //             id: this._ventas.length ? this._ventas[this._ventas.length - 1].id + 1 : 1,
+    //             id_cliente,
+    //             id_vino,
+    //             fecha_venta: new Date().toISOString()
+    //         };
     
-            this._ventas.push(nueva_venta);
+    //         this._ventas.push(nueva_venta);
 
-            resolve(nueva_venta); 
+    //         resolve(nueva_venta); 
+    //     });
+    // }
+
+
+    getByCliente(id_cliente) {
+        return new Promise((resolve, reject) => {
+            const cliente = this._clientes.find(c => c.id === id_cliente);
+            
+            if (cliente && cliente.ventas && cliente.ventas.length > 0) {
+                resolve(cliente.ventas);
+            } else {
+                reject(new Error('No se encontraron ventas para este cliente'));
+            }
         });
     }
 
-
-    getByCliente(id) {
+    addVenta(id_cliente, nuevaVenta) {
         return new Promise((resolve, reject) => {
-            // Buscar el cliente por id
-            const cliente = this._ventas.filter(c => c.id === id);
+            const cliente = this._clientes.find(c => c.id === id_cliente);
     
             if (cliente) {
-
-                resolve(cliente);
-
+                if (!cliente.ventas) {
+                    cliente.ventas = [];
+                }
+                cliente.ventas.push(nuevaVenta);
+                resolve(cliente.ventas);
             } else {
-
-                reject(cliente);
+                reject(new Error('Cliente no encontrado'));
             }
-
         });
-        //     // Verificar si el cliente y las ventas existen
-        //     if (cliente && cliente.ventas && cliente.ventas.length > 0) {
-        //         resolve(cliente.ventas);
-        //     } else {
-        //         reject(new Error('No se encontraron ventas para este cliente'));
-        //     }
-        // });
     }
 
 
