@@ -196,6 +196,28 @@ app.get('/v1/clientes/:id/ventas', async (req, res) => {
     }
 });
 
+//Obtengo los clientes que hicieron mas de 2 compras
+app.get('/v1/clientes/frecuentes', async (req, res) => {
+    try {
+        let compras = await ServicioVentas.frecuentes(req.params.id_cliente);
+        res.json(compras);
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({ error: error.message });
+    }
+});
+
+//Obtengo los clientes que no hicieron ninguna compra
+app.get('/v1/clientes/frecuentes', async (req, res) => {
+    try {
+        // Asumimos que este método devuelve un array de clientes frecuentes
+        let clientesFrecuentes = await ServicioVentas.frecuentes();
+        res.json(clientesFrecuentes);
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({ error: error.message });
+    }
+});
 
 
 const PORT = 3000;

@@ -42,38 +42,18 @@ class ServicioVentas {
     }
 
 
-    // getByCliente(id_cliente) {
-    //     return new Promise((resolve, reject) => {
-    //         const clientes = this._ventas.find(c => c.id === id_cliente);
-            
-    //         // Si encontramos al menos un cliente y este tiene ventas
-    //         if (clientes.length > 0 && clientes[0].ventas && clientes[0].ventas.length > 0) {
-    //             resolve(clientes[0].ventas);
-    //         } else {
-    //             reject(new Error('No se encontraron ventas para este cliente'));
-    //         }
-    //     });
-    // }
-
     getByCliente(id_cliente) {
-
         return new Promise((resolve, reject) => {
-
-            const ventasEmpleado = this._ventas.filter(v => v.id === id_cliente);
+            const clientes = this._ventas.find(c => c.id === id_cliente);
             
-            if (ventasEmpleado) {
-
-                resolve(ventasEmpleado);
-
+            // Si encontramos al menos un cliente y este tiene ventas
+            if (clientes.length > 0 && clientes[0].ventas && clientes[0].ventas.length > 0) {
+                resolve(clientes[0].ventas);
             } else {
-
-                reject(id_cliente);
+                reject(new Error('No se encontraron ventas para este cliente'));
             }
-
         });
-
-    }    
-
+    }
 
     deleteById(id) {
         return new Promise((resolve, reject) => {
@@ -86,6 +66,16 @@ class ServicioVentas {
             }
         });
     }
+
+    frecuentes(id_cliente){
+            // Filtramos las ventas para contar cuántas tiene el cliente específico
+            const ventasDelCliente = ventas.filter(venta => venta.id === id_cliente);
+            
+            // Verificamos si el número de ventas es mayor que 2
+            if (ventasDelCliente.length > 2) {
+                return `El cliente con ID ${clienteId} tiene más de 2 ventas.`;
+    }
+}
 };
 
 module.exports = new ServicioVentas();
