@@ -47,6 +47,26 @@ class ServicioClientes {
         });
     }
 
+
+    getByCliente(id_cliente) {
+
+        return new Promise((resolve, reject) => {
+
+            const comprasCliente = this._compras.filter(v => v.id_cliente === id_cliente);
+            
+            if (comprasCliente) {
+
+                resolve(comprasCliente);
+
+            } else {
+
+                reject(comprasCliente);
+            }
+
+        });
+
+    }    
+
     // Como cliente por el id
        getById(id) {
         return new Promise((resolve, reject) => {

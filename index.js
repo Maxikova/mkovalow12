@@ -100,7 +100,6 @@ app.get('/v1/clientes/:id', async (req, res) => {
     }
 });
 
-
 app.post('/v1/clientes', async (req, res) => {
     const {nombre, sexo} = req.query;
     if (!nombre || !sexo )
@@ -184,6 +183,20 @@ app.post('/v1/ventas', async (req, res) => {
         res.status(500).send('Error interno del servidor');
     }
 });
+
+//Obtengo las ventas especificas de los clientes
+app.get('/v1/clientes/:id/ventas', async(req, res) => {
+  
+    try {
+      const id_cliente = request.params.id_cliente;
+      let compras = await ServicioVentas.getByCliente(request.params.id_cliente);
+      response.json(compras);
+    } catch(error) {
+        console.log(error);
+        response.status(404).end();
+  
+    }
+  });
 
 
 const PORT = 3000;
