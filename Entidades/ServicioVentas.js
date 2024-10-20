@@ -67,15 +67,21 @@ class ServicioVentas {
         });
     }
 
-    frecuentes(id_cliente){
-            // Filtramos las ventas para contar cuántas tiene el cliente específico
-            const ventasDelCliente = ventas.filter(venta => venta.id === id_cliente);
-            
-            // Verificamos si el número de ventas es mayor que 2
+    getByClienteFrecuente(id_cliente) {
+        return new Promise((resolve, reject) => {
+            // Filtramos las ventas del cliente
+            const ventasDelCliente = this._ventas.filter(v => v.id === id_cliente);
+
+            // Verificamos cuántas ventas tiene el cliente
             if (ventasDelCliente.length > 2) {
-                return `El cliente con ID ${clienteId} tiene más de 2 ventas.`;
+                resolve(`El cliente con ID ${id_cliente} tiene más de 2 ventas.`);
+            } else if (ventasDelCliente.length === 2) {
+                resolve(`El cliente con ID ${id_cliente} tiene exactamente 2 ventas.`);
+            } else {
+                reject(new Error(`El cliente con ID ${id_cliente} no tiene más de 2 ventas.`));
+            }
+        });
     }
-}
 };
 
 module.exports = new ServicioVentas();
