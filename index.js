@@ -189,7 +189,7 @@ app.get('/v1/clientes/:id/ventas', async(req, res) => {
   
     try {
       const id_cliente = req.params.id_cliente;
-      let compras = await ServicioVentas.getByCliente(req.params.id_cliente);
+      let compras = await ServicioClientes.getByCliente(req.params.id_cliente);
       res.json(compras);
     } catch(error) {
         console.log(error);
