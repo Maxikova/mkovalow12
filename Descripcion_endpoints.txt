@@ -4,8 +4,8 @@ GET v1/vinos : Trae todos los vinos
     v1/clientes : Trae todos los clientes
     v1/clientes/:id : Busca los clientes por ID
     v1/clientes/:id/ventas : Muestra las ventas que se le hicieron a determinado cliente
-    v1/clientes/inactivos : Trae aquellos clientes que no hicieron ninguna compra todavia
-    v1/clientes/frecuentes : Trae a aquellos clientes que hicieron mas de 2 compras.
+    v1/inactivos : Trae aquellos clientes que no hicieron ninguna compra todavia
+    v1/frecuentes : Trae a aquellos clientes que hicieron mas de 2 compras.
     v1/ventas : Trae todas las ventas. 
     v1/ventaas/:id : Trae venta por ID
 

@@ -89,19 +89,8 @@ app.get('/v1/clientes', async (req, res) => {
     res.json(clientes);
 });
 
-// Obtener clientes por ID
-app.get('/v1/clientes/:id', async (req, res) => {
-    try {
-        let clientes = await ServicioClientes.getById(req.params.id); 
-        res.json(clientes);
-    } catch(err) {
-        console.log(err);
-        res.status(404).end();
-    }
-});
-
-//Obtengo los clientes que no hicieron ninguna compra
-app.get('/v1/frecuentes', async (req, res) => {
+//Obtengo los clientes frecuentes, indicando tambien el número de veces que compraron
+app.get('/v1/clientes/frecuentes', async (req, res) => {
     try {
         let clientesFrecuentes = await ServicioVentas.getClientesFrecuentes();
         if (clientesFrecuentes.length > 0) {
@@ -114,6 +103,19 @@ app.get('/v1/frecuentes', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+// Obtener clientes por ID
+app.get('/v1/clientes/:id', async (req, res) => {
+    try {
+        let clientes = await ServicioClientes.getById(req.params.id); 
+        res.json(clientes);
+    } catch(err) {
+        console.log(err);
+        res.status(404).end();
+    }
+});
+
+
 
 app.post('/v1/clientes', async (req, res) => {
     const {nombre, sexo} = req.query;
