@@ -1,6 +1,7 @@
 class ServicioVentas {
     constructor() {
         this._ventas = [];
+        this._clientes = clientes;
     }
 
     getAll() {
