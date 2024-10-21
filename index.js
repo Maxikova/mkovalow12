@@ -101,7 +101,7 @@ app.get('/v1/clientes/:id', async (req, res) => {
 });
 
 //Obtengo los clientes que no hicieron ninguna compra
-app.get('/v1/clientes/frecuentes', async (req, res) => {
+app.get('/v1/frecuentes', async (req, res) => {
     try {
         let clientesFrecuentes = await ServicioVentas.getClientesFrecuentes();
         if (clientesFrecuentes.length > 0) {
