@@ -56,7 +56,7 @@ class ServicioClientes {
             if (cliente) {
                 resolve(cliente);
             } else {
-                reject(`Cliente con ID ${id} no encontrado`);
+                reject(`Cliente con ID ${id} no encontrados`);
             }
         });
     }
