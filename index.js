@@ -100,6 +100,21 @@ app.get('/v1/clientes/:id', async (req, res) => {
     }
 });
 
+//Obtengo los clientes que no hicieron ninguna compra
+app.get('/v1/clientes/frecuentes', async (req, res) => {
+    try {
+        let clientesFrecuentes = await ServicioVentas.getClientesFrecuentes();
+        if (clientesFrecuentes.length > 0) {
+            res.json(clientesFrecuentes);
+        } else {
+            res.status(404).json({ message: 'No hay clientes frecuentes.' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.post('/v1/clientes', async (req, res) => {
     const {nombre, sexo} = req.query;
     if (!nombre || !sexo )
@@ -196,20 +211,7 @@ app.get('/v1/clientes/:id/ventas', async (req, res) => {
     }
 });
 
-//Obtengo los clientes que no hicieron ninguna compra
-app.get('/v1/clientes/frecuentes', async (req, res) => {
-    try {
-        let clientesFrecuentes = await ServicioVentas.getClientesFrecuentes();
-        if (clientesFrecuentes.length > 0) {
-            res.json(clientesFrecuentes);
-        } else {
-            res.status(404).json({ message: 'No hay clientes frecuentes.' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: error.message });
-    }
-});
+
 
 
 const PORT = 3000;
