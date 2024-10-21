@@ -91,6 +91,15 @@ class ServicioVentas {
             resolve(resultado);
         });
     }
+
+
+    getClientesInactivos() {
+        return new Promise((resolve) => {
+            const clientesConVentas = new Set(this._ventas.map(venta => venta.id_cliente));
+            const clientesInactivos = this._clientes.filter(cliente => !clientesConVentas.has(cliente.id));
+            resolve(clientesInactivos);
+        });
+    }
 };
 
 module.exports = new ServicioVentas();

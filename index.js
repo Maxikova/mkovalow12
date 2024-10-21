@@ -104,6 +104,21 @@ app.get('/v1/clientes/frecuentes', async (req, res) => {
     }
 });
 
+app.get('/v1/clientes/inactivos', async (req, res) => {
+    try {
+        let clientesInactivos = await ServicioVentas.getClientesInactivos();
+        if (clientesInactivos.length > 0) {
+            res.json(clientesInactivos);
+        } else {
+            res.status(404).json({ message: 'No hay clientes sin ventas.' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 // Obtener clientes por ID
 app.get('/v1/clientes/:id', async (req, res) => {
     try {
