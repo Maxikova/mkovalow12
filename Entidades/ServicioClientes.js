@@ -95,6 +95,12 @@ class ServicioClientes {
         });
     }
 
+    deleteById(id) {
+
+        const index = this._clientes.findIndex(v => v.id === id);
+        this._clientes.splice(index, 1);
+    }
+
 };
 
 module.exports = new ServicioClientes();
