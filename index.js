@@ -80,7 +80,7 @@ app.put('/v1/vinos/:id', async (req, res) => {
 //     }
 // });
 
-app.delete('/v1/vehiculos/:id', async(req, res) => {
+app.delete('/v1/vinos/:id', async(req, res) => {
   
     const id = parseInt(req.params.id);  
   
