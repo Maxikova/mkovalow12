@@ -155,15 +155,20 @@ app.put('/v1/clientes/:id', async (req, res) => {
 });
 
 // Eliminar un cliente por ID
-app.delete('/v1/clientes/:id', async (req, res) => {
+app.delete('/v1/clientes/:id', async(req, res) => {
+  
+    const id = parseInt(req.params.id);  
+  
     try {
-        let clientes = await service.deleteById(req.params.id);
-        res.json(clientes);
-    } catch (error) {
-        res.status(404).send('Cliente no encontrado');
+      await ServicioClientes.getById(req.params.id);
+      let clientes = await ServicioClientes.deleteById(id);
+      
+      res.status(200).send('Cliente eliminado correctamente');
+    } catch(error) {
+      console.log(error);
+      response.status(404).end();
+
     }
-    // ServicioClientes.deleteById(req.params.id);
-    // res.status(204).end();
 });
 
 // Obtener todas las ventas
