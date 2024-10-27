@@ -71,12 +71,28 @@ app.put('/v1/vinos/:id', async (req, res) => {
 });
 
 // Eliminar un vino por ID
-app.delete('/v1/vinos/:id', async (req, res) => {
+// app.delete('/v1/vinos/:id', async (req, res) => {
+//     try {
+//         let vinos = await service.deleteById(req.params.id);
+//         res.json(vinos);
+//     } catch (error) {
+//         res.status(404).send('Vino no encontrado');
+//     }
+// });
+
+app.delete('/v1/vehiculos/:id', async(req, res) => {
+  
+    const id = parseInt(req.params.id);  
+  
     try {
-        let vinos = await service.deleteById(req.params.id);
-        res.json(vinos);
-    } catch (error) {
-        res.status(404).send('Vino no encontrado');
+      await servicioVinos.getById(req.params.id);
+      let vinos = await servicioVinos.deleteById(id);
+      
+      res.status(200).send('Vino eliminado correctamente');
+    } catch(error) {
+      console.log(error);
+      response.status(404).end();
+
     }
 });
 
@@ -103,21 +119,6 @@ app.get('/v1/clientes/frecuentes', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-app.get('/v1/clientes/inactivos', async (req, res) => {
-    try {
-        let clientesInactivos = await ServicioVentas.getClientesInactivos();
-        if (clientesInactivos.length > 0) {
-            res.json(clientesInactivos);
-        } else {
-            res.status(404).json({ message: 'No hay clientes sin ventas.' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
 
 // Obtener clientes por ID
 app.get('/v1/clientes/:id', async (req, res) => {
