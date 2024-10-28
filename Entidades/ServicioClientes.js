@@ -96,9 +96,16 @@ class ServicioClientes {
     }
 
     deleteById(id) {
-
-        const index = this._clientes.findIndex(v => v.id === id);
-        this._clientes.splice(index, 1);
+        return new Promise((resolve, reject) => {
+            const index = this._clientes.findIndex(v => v.id === id); // Busca el cliente
+    
+            if (index !== -1) {
+                this._clientes.splice(index, 1); // Se elimina el cliente
+                resolve(); 
+            } else {
+                reject('Cliente no encontrado');
+            }
+        });
     }
 
 };

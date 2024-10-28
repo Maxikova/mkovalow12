@@ -105,13 +105,13 @@ class ServicioVinos {
 
         deleteById(id) {
             return new Promise((resolve, reject) => {
-                const index = this._vinos.findIndex(v => v.id === id); // Busca el índice del vino
+                const index = this._vinos.findIndex(v => v.id === id); // Busca el vino
         
                 if (index !== -1) {
                     this._vinos.splice(index, 1); // Elimina el vino
-                    resolve(); // Resuelve la promesa si el vino fue eliminado
+                    resolve(); 
                 } else {
-                    reject('Vino no encontrado'); // Rechaza la promesa si el vino no se encontró
+                    reject('Vino no encontrado'); 
                 }
             });
         }

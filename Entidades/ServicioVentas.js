@@ -41,19 +41,17 @@ class ServicioVentas {
         });
     }
 
-
     getByCliente(id_cliente) {
         return new Promise((resolve, reject) => {
-            const clientes = this._ventas.find(c => c.id === id_cliente);
-            
-            // Si encontramos al menos un cliente y este tiene ventas
-            if (clientes.length > 0 && clientes[0].ventas && clientes[0].ventas.length > 0) {
-                resolve(clientes[0].ventas);
-            } else {
-                reject(new Error('No se encontraron ventas para este cliente'));
+            const ventasCliente = this._ventas.filter(v => v.id === id_cliente);
+            if (ventasCliente) {
+                resolve(ventasCliente);
             }
+            // else {
+              //  reject(ClienteID);
+            //}
         });
-    }
+    }   
 
     deleteById(id) {
         return new Promise((resolve, reject) => {
@@ -98,6 +96,19 @@ class ServicioVentas {
             const clientesConVentas = new Set(this._ventas.map(venta => venta.id_cliente));
             const clientesInactivos = this._clientes.filter(cliente => !clientesConVentas.has(cliente.id));
             resolve(clientesInactivos);
+        });
+    }
+
+    deleteById(id) {
+        return new Promise((resolve, reject) => {
+            const index = this._ventas.findIndex(v => v.id === id); // Busca a la venta
+    
+            if (index !== -1) {
+                this._ventas.splice(index, 1); // Se elimina la venta
+                resolve(); 
+            } else {
+                reject('Venta no encontrado');
+            }
         });
     }
 };

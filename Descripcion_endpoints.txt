@@ -6,7 +6,7 @@ GET v1/vinos : Trae todos los vinos
     v1/clientes/:id/ventas : Muestra las ventas que se le hicieron a determinado cliente
     v1/clientes/frecuentes : Trae a aquellos clientes que hicieron mas de 2 compras.
     v1/ventas : Trae todas las ventas. 
-    v1/ventaas/:id : Trae venta por ID
+    v1/ventas/:id : Trae venta por ID
 
 POST /v1/vinos : Agrega un vino
      /v1/clientes : Agrega un cliente
