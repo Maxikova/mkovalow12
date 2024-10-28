@@ -91,7 +91,7 @@ app.delete('/v1/vinos/:id', async(req, res) => {
       res.status(200).send('Vino eliminado correctamente');
     } catch(error) {
       console.log(error);
-      response.status(404).send("Vino inexistente");
+      res.status(404).send("Vino inexistente");
 
     }
 });
@@ -166,7 +166,7 @@ app.delete('/v1/clientes/:id', async(req, res) => {
       res.status(200).send('Cliente eliminado correctamente');
     } catch(error) {
       console.log(error);
-      response.status(404).send("Cliente inexistente");
+      res.status(404).send("Cliente inexistente");
 
     }
 });
