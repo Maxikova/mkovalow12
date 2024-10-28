@@ -97,10 +97,23 @@ class ServicioVinos {
     }
 
     // Eliminar vino por ID
-        deleteById(id)
-        {
-        const index = this._vinos.findIndex(v => v.id === id);
-        this._vinos.splice(index, 1);
+        // deleteById(id)
+        // {
+        // const index = this._vinos.findIndex(v => v.id === id);
+        // this._vinos.splice(index, 1);
+        // }
+
+        deleteById(id) {
+            return new Promise((resolve, reject) => {
+                const index = this._vinos.findIndex(v => v.id === id); // Busca el índice del vino
+        
+                if (index !== -1) {
+                    this._vinos.splice(index, 1); // Elimina el vino
+                    resolve(); // Resuelve la promesa si el vino fue eliminado
+                } else {
+                    reject('Vino no encontrado'); // Rechaza la promesa si el vino no se encontró
+                }
+            });
         }
 }
 
