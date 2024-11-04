@@ -172,7 +172,7 @@ app.get('/v1/vinos/:id', async (req, res) => {
  */
 
 app.post('/v1/vinos', async (req, res) => {
-    const {marca, bodega, año, precio} = req.query;
+    const {marca, bodega, año, precio} = req.body;
     if (!marca || !bodega || !año || !precio)
     {
         return res.status(400).send('Faltan datos del vino');
@@ -401,7 +401,7 @@ app.get('/v1/clientes/:id', async (req, res) => {
  *         description: Faltan datos del cliente
  */
 app.post('/v1/clientes', async (req, res) => {
-    const {nombre, sexo} = req.query;
+    const {nombre, sexo} = req.body;
     if (!nombre || !sexo )
     {
         return res.status(400).send('Faltan datos del cliente');
