@@ -3,11 +3,11 @@ class ServicioClientes {
         console.log('Clientes');
 
         this._clientes = [
-            { id: 1, nombre: 'Maximiliano', Sexo: 'Masculino'},
-            { id: 2, nombre: 'Marcela', Sexo: 'Femenino'},
-            { id: 3, nombre: 'Bautista', Sexo: 'Masculino'},
-            { id: 4, nombre: 'Andrea', Sexo: 'Femenino'},
-            { id: 5, nombre: 'Facundo', Sexo: 'Masculino'}
+            { id: 11, nombre: 'Maximiliano', Sexo: 'Masculino'},
+            { id: 22, nombre: 'Marcela', Sexo: 'Femenino'},
+            { id: 33, nombre: 'Bautista', Sexo: 'Masculino'},
+            { id: 44, nombre: 'Andrea', Sexo: 'Femenino'},
+            { id: 55, nombre: 'Facundo', Sexo: 'Masculino'}
         ];
     }
 

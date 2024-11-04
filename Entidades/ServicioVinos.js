@@ -3,11 +3,11 @@ class ServicioVinos {
         console.log('Vinos');
 
         this._vinos = [
-            { id: 1, nombre: 'Cabernet Sauvignon', año: 2018, bodega: 'Bodega A', precio: 1500 },
-            { id: 2, nombre: 'Malbec', año: 2020, bodega: 'Bodega B', precio: 1200 },
-            { id: 3, nombre: 'Syrah', año: 2019, bodega: 'Bodega C', precio: 1800 },
-            { id: 4, nombre: 'Pinot Noir', año: 2017, bodega: 'Bodega D', precio: 2000 },
-            { id: 5, nombre: 'Chardonnay', año: 2021, bodega: 'Bodega E', precio: 2200 }
+            { id: 11, nombre: 'Cabernet Sauvignon', año: 2018, bodega: 'Bodega A', precio: 1500 },
+            { id: 22, nombre: 'Malbec', año: 2020, bodega: 'Bodega B', precio: 1200 },
+            { id: 33, nombre: 'Syrah', año: 2019, bodega: 'Bodega C', precio: 1800 },
+            { id: 44, nombre: 'Pinot Noir', año: 2017, bodega: 'Bodega D', precio: 2000 },
+            { id: 55, nombre: 'Chardonnay', año: 2021, bodega: 'Bodega E', precio: 2200 }
         ];
     }
 
