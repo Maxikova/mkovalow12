@@ -12,6 +12,7 @@ const cors = require('cors');
 const swaggerInfo = require('./SwaggerInfo');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const ServicioVinos = require('./Entidades/ServicioVinos');
 const swaggerDocs = swaggerJSDoc(swaggerInfo);
 
 
@@ -172,14 +173,18 @@ app.get('/v1/vinos/:id', async (req, res) => {
  */
 
 app.post('/v1/vinos', async (req, res) => {
-    const {marca, bodega, año, precio} = req.body;
-    if (!marca || !bodega || !año || !precio)
+    const {nombre, año, bodega, precio} = req.body;
+    if (!nombre || !año || !bodega || !precio)
     {
         return res.status(400).send('Faltan datos del vino');
     }
-    let nuevoVino = await servicioVinos.add(req.query); 
+    //let nuevoVino = await servicioVinos.add(req.query);
+    
+    await ServicioVinos.add({nombre,año,bodega,precio});
     res.status(201).send("Vino creado correctamente");
 });
+
+
 
 // Actualizar un vino
 /**
@@ -219,8 +224,8 @@ app.post('/v1/vinos', async (req, res) => {
 app.put('/v1/vinos/:id', async (req, res) => {
     const idVino = req.params.id;
     let VinoActualizar = await servicioVinos.getById(idVino);
-    const{marca,bodega,año,precio} = req.body; // Es el body
-    if(marca) VinoActualizar.marca = marca;
+    const{nombre,bodega,año,precio} = req.body; // Es el body
+    if(nombre) VinoActualizar.nombre = nombre;
     if(bodega) VinoActualizar.bodega = bodega;
     if(año) VinoActualizar.año = año;
     if(precio) VinoActualizar.precio = precio;
@@ -400,15 +405,20 @@ app.get('/v1/clientes/:id', async (req, res) => {
  *       400:
  *         description: Faltan datos del cliente
  */
-app.post('/v1/clientes', async (req, res) => {
-    const {nombre, sexo} = req.body;
-    if (!nombre || !sexo )
-    {
+app.post('/v1/clientes/', async (req, res) => {
+    const { nombre, sexo } = req.body;
+    console.log(req.body);
+
+    if (!nombre || !sexo) {
         return res.status(400).send('Faltan datos del cliente');
     }
-    let nuevoCliente = await ServicioClientes.add(req.query); 
+
+    await ServicioClientes.add({ nombre, sexo });
+    console.log("Prueba");
+    console.log(req.body);
     res.status(201).send("Cliente creado correctamente");
 });
+  
 
 // Actualizar datos de un cliente
 /**
@@ -449,7 +459,7 @@ app.put('/v1/clientes/:id', async (req, res) => {
     if(nombre) clienteActualizar.nombre = nombre;
     if(sexo) clienteActualizar.sexo = sexo;
     let Cliente_Actualizado = await servicioVinos.update(clienteActualizar);
-    res.status(201).send('Vino actualizado correctamente');
+    res.status(201).send('Cliente actualizado correctamente');
 });
 
 
@@ -604,7 +614,6 @@ app.get('/v1/ventas/:id' , async(req,res) =>{
 app.post('/v1/ventas', async (req, res) => {
     const { id_cliente, id_vino } = req.body;
 
-    // Imprimir el cuerpo de la solicitud para depuración
     console.log(req.body);
 
     if (!id_vino || !id_cliente) {
@@ -731,7 +740,7 @@ app.get('/v1/clientes/:id/ventas', async (req, res) => {
     }
 });
 
-const PORT = 3000;
+const PORT = 4000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

@@ -3,11 +3,11 @@ class ServicioClientes {
         console.log('Clientes');
 
         this._clientes = [
-            { id: 11, nombre: 'Maximiliano', Sexo: 'Masculino'},
-            { id: 22, nombre: 'Marcela', Sexo: 'Femenino'},
-            { id: 33, nombre: 'Bautista', Sexo: 'Masculino'},
-            { id: 44, nombre: 'Andrea', Sexo: 'Femenino'},
-            { id: 55, nombre: 'Facundo', Sexo: 'Masculino'}
+            { id: 1, nombre: 'Maximiliano', sexo: 'Masculino'},
+            { id: 2, nombre: 'Marcela', sexo: 'Femenino'},
+            { id: 3, nombre: 'Bautista', sexo: 'Masculino'},
+            { id: 4, nombre: 'Andrea', sexo: 'Femenino'},
+            { id: 5, nombre: 'Facundo', sexo: 'Masculino'}
         ];
     }
 
@@ -61,7 +61,7 @@ class ServicioClientes {
         });
     }
 
-    // Se agrega un nuevo cliente
+    //Se agrega un nuevo cliente
     add(cliente) {
         return new Promise(resolve => {
             const { nombre, sexo, } = cliente;
@@ -72,13 +72,15 @@ class ServicioClientes {
                 sexo
             };
 
-            this._clientes.push(nuevoCliente);  // Agrega al array en memoria el cliente
-
-            setTimeout(() => {
+            if (nuevoCliente) {
+                this._clientes.push(nuevoCliente);
                 resolve(nuevoCliente);
-            }, 100);
+
+            } 
+        
         });
     }
+
 
     // Actualiza a un cliente segun ID
     update(clienteActualizado) {

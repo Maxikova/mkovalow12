@@ -91,14 +91,6 @@ class ServicioVentas {
     }
 
 
-    getClientesInactivos() {
-        return new Promise((resolve) => {
-            const clientesConVentas = new Set(this._ventas.map(venta => venta.id_cliente));
-            const clientesInactivos = this._clientes.filter(cliente => !clientesConVentas.has(cliente.id));
-            resolve(clientesInactivos);
-        });
-    }
-
     deleteById(id) {
         return new Promise((resolve, reject) => {
             const index = this._ventas.findIndex(v => v.id === id); // Busca a la venta
