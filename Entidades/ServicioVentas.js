@@ -69,7 +69,7 @@ class ServicioVentas {
         return new Promise((resolve) => {
             const clientesFrecuentes = {};
 
-            // Contamos las ventas por cliente
+            //Cuento las ventas por cliente
             this._ventas.forEach(venta => {
                 const { id_cliente } = venta;
                 if (!clientesFrecuentes[id_cliente]) {
@@ -78,7 +78,6 @@ class ServicioVentas {
                 clientesFrecuentes[id_cliente]++; // Incrementa el contador de ventas
             });
 
-            // Filtramos los clientes que tienen más de 2 ventas
             const resultado = Object.keys(clientesFrecuentes)
                 .filter(clienteId => clientesFrecuentes[clienteId] > 2)
                 .map(clienteId => ({
@@ -89,7 +88,6 @@ class ServicioVentas {
             resolve(resultado);
         });
     }
-
 
     deleteById(id) {
         return new Promise((resolve, reject) => {
